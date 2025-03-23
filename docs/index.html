@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разворачивающийся список</title>
+
+
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            justify-content: center;
+            text-align: center;
+            display: flex;
+            color: var(--tg-theme-text-color);
+            font-family: 'Roboto', Arial;
+            font-size: 20px;
+            background-color: rgb(240, 240, 240);
+            user-select: none;
+            outline: none;
+            margin: 0;
+	    }
+
+        #menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 50px;
+            background-color: black;
+            text-align: center;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            transition: 500ms;
+            z-index: 3;
+            overflow: hidden;
+
+        }
+
+        span {
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        .menu_button {
+            margin-right: 10px;
+            margin-left: 10px;
+            filter: invert()
+        }
+
+        .ava {
+            border: 2px solid rgb(221, 74, 111);
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 50px;
+        }
+
+        .data {
+        }
+
+        #dt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(221, 74, 111);
+            text-align: center;
+            padding-top: 0;
+            padding-bottom: 2px;
+            opacity: 0.5;
+        }
+
+        #gl {
+            z-index: 1;
+            transition: 500ms;
+        }
+
+        .div_pyst {
+            justify-content: none;
+            border-radius: 10px;
+            background-color: white;
+            padding: 30px;
+            justify-content: center;
+        }
+
+        p {
+        }
+
+        .home-indicator {
+            width: 100px;
+            height: 5px;
+            background-color: #bdbdbd;
+            border-radius: 2.5px;
+            margin-bottom: 20px;
+        }
+
+        #hd {
+            transition: 500ms;
+        }
+
+        #spec {
+            display: flex;
+            justify-content: center;
+            width: 100vw;
+        }
+
+        #param {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            filter: invert();
+            width: 25px;
+            height: 25px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 10px;
+            border-radius: 15px;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            right: 0;
+            opacity: 0.7;
+        }
+
+        #nasad {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            filter: invert();
+            width: 25px;
+            height: 25px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 10px;
+            border-radius: 15px;
+            background-color: white;
+            float: left;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+        }
+
+        #param0 {
+            position: fixed;
+            z-index: 2;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div id = 'param0' style = 'width: 100%; position: fixed; transition: 500ms; display: none;'>
+        <img src = 'https://img.icons8.com/?size=100&id=E2Y2iSjLCP6k&format=png&color=000000' id = 'nasad' style = 'transition: 500ms'>
+        <div id = 'param1' style = 'transition: 500ms; width: 100%;'><img src = 'https://cdn-icons-png.flaticon.com/128/7131/7131131.png' id = 'param' onclick = 'param()' style = 'transition: 500ms'></div>
+    </div>
+
+    <div id = 'gl' onclick="pyst()" style="filter: blur(0px);">
+        <div class="div_pyst" style = 'display: none;'>
+            <div class = 'ava'><img src = 'https://avatanplus.com/files/photos/mid/5ed4f2ff1b7441726fd53488.png' width="100%" height="100%"></div>
+            <p>♡ 𝑵𝒐 𝑶𝒏𝒆 ♡</p>
+        </div>
+
+        <div class = 'home_screen' style = 'width: 100vw; background-color: black; margin: 0; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;'>
+            <img src = './DT.jpg' width = '80px' height = '80px' alt = 'изображение' style = 'border-radius: 15px; border: 1px solid white; transform: translateX(-30vw); margin: 10px;'> 
+            <h6 style = 'color: white; float: right;'>Diamonds Team</h6>
+        </div>
+    </div>
+
+    
+    <div id="menu" style="padding-top: 15px;">
+        <div id = 'spec'><div class = 'home-indicator' id = 'hd'></div></div>       
+        <img src = 'https://cdn-icons-png.flaticon.com/512/813/813670.png' width="8%" height="8%" class = 'menu_button' id = 'home' onclick = 'jump("home")'>
+        <img src = 'https://cdn-icons-png.flaticon.com/512/3005/3005154.png' width="8%" height="8%" class = 'menu_button' id = 'event' onclick = 'jump("event")'>
+        <img src = 'https://cdn-icons-png.flaticon.com/512/262/262038.png' id = 'plus' width="10%" height="10%" class = 'menu_button' onclick = 'plus()'>
+        <img src = 'https://cdn-icons-png.flaticon.com/512/149/149309.png' width="8%" height="8%" class = 'menu_button' id = 'search' onclick = 'jump("search")'>
+        <img src = 'https://cdn-icons-png.flaticon.com/512/1159/1159740.png' width="8%" height="8%" class = 'menu_button' id = 'user' onclick = 'jump("user")'>
+    </div>
+
+    <script>
+        function jump(name) {
+            const element = document.getElementById(`${name}`);
+            element.style.transform = "translateY(-12px)";
+            element.style.transition = "0.3s";
+
+            setTimeout(() => {
+                element.style.transform = "translateY(5px)";
+
+                setTimeout(() => {
+                    element.style.transform = "translateY(0)";
+                }, 300);
+            }, 300);
+        }
+
+        
+        function plus() {
+            const menu = document.getElementById("menu");
+            if (menu.style.paddingTop === '15px') {
+                menu.style.paddingTop = '250px';
+                const gl = document.getElementById("gl");
+                gl.style.filter = 'blur(20px)';
+                document.getElementById('hd').style.transform = "translateY(-230px)";
+                document.getElementById('hd').style.width = '50px';
+                setTimeout(() => {
+                    menu.style.paddingTop = '200px';
+                    document.getElementById('hd').style.width = '100px';
+                    document.getElementById('hd').style.transform = "translateY(-185px)";
+                }, 500)
+            } else {
+                menu.style.paddingTop = '30px';
+                document.getElementById('hd').style.width = '50px';
+                document.getElementById('hd').style.transform = "translateY(0)";
+                const gl = document.getElementById("gl");
+                gl.style.filter = 'blur(0)';
+                setTimeout(() => {
+                    menu.style.paddingTop = '15px';
+                    document.getElementById('hd').style.width = '100px';
+                }, 500)
+
+            }
+
+            const element = document.getElementById('plus');
+            element.style.transform = "scale(0.7)";
+            element.style.transition = "0.3s";
+
+            setTimeout(() => {
+                element.style.transform = "scale(1.2)";
+                setTimeout(() => {
+                    element.style.transform = "scale(1)"
+                }, 300)
+            }, 300);
+        }
+
+        function pyst() {
+            const gl = document.getElementById("gl");
+            if (gl.style.filter === 'blur(20px)') {
+                menu.style.paddingTop = '30px';
+                document.getElementById('hd').style.width = '50px';
+                document.getElementById('hd').style.transform = "translateY(0)";
+                const gl = document.getElementById("gl");
+                gl.style.filter = 'blur(0)';
+                setTimeout(() => {
+                    menu.style.paddingTop = '15px';
+                    document.getElementById('hd').style.width = '100px';
+                }, 500)
+            }
+        }
+
+        function param() {
+            const param = document.getElementById('param');
+            param.style.opacity = '1';
+            document.getElementById('gl').style.filter = 'blur(20px)';
+            document.getElementById('nasad').style.transform = 'translateX(20px)';
+            setTimeout(() => {
+                document.getElementById('nasad').style.transform = 'translateX(-100px)';
+                const param1 = document.getElementById('param1');
+                param1.style.position = 'fixed';
+                param1.style.display = 'flex';
+                param1.style.justifyContent = 'center';
+                param.style.position = 'static';
+
+                setTimeout(() => {
+                    setTimeout(() => {
+                        param.style.paddingLeft = '100px';
+                        param.style.paddingRight = '100px';
+                        param.style.paddingBottom = '300px';
+                    }, 500)
+                }, 600)
+            }, 500)
+        }
+
+    </script>
+</body>
+</html>
